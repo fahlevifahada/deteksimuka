@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy.spatial.distance import euclidean
 
 st.set_page_config(
-    page_title="Then & Now AI",
+    page_title="Deteksi Kemiripan Wajah",
     page_icon="🌷",
     layout="centered"
 )
@@ -386,6 +386,44 @@ foto2 = st.file_uploader(
 )
 
 st.markdown("</div>", unsafe_allow_html=True)
+
+# PREVIEW FOTO
+
+if foto1 or foto2:
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if foto1:
+            st.markdown("""
+            <div class="glass">
+                <h4 style="text-align:center;color:white;">
+                    👶 Foto Masa Kecil
+                </h4>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.image(
+                foto1,
+                use_container_width=True
+            )
+
+    with col2:
+        if foto2:
+            st.markdown("""
+            <div class="glass">
+                <h4 style="text-align:center;color:white;">
+                    🧑 Foto Dewasa
+                </h4>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.image(
+                foto2,
+                use_container_width=True
+            )
 
 # ======================
 # ANALISIS
