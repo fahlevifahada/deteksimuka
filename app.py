@@ -40,40 +40,42 @@ html, body, [class*="css"]{
 /* GLOW EFFECT */
 .glow1{
     position:fixed;
-    top:-300px;
-    left:-300px;
 
-    width:800px;
-    height:800px;
+    top:-150px;
+    left:-150px;
+
+    width:500px;
+    height:500px;
 
     background:#ff4ecd;
 
     border-radius:50%;
 
-    filter:blur(200px);
+    filter:blur(120px);
 
-    opacity:.18;
+    opacity:.4;
 
-    z-index:-1;
+    z-index:0;
 }
 
 .glow2{
     position:fixed;
-    bottom:-300px;
-    right:-300px;
 
-    width:800px;
-    height:800px;
+    bottom:-150px;
+    right:-150px;
+
+    width:500px;
+    height:500px;
 
     background:#a855f7;
 
     border-radius:50%;
 
-    filter:blur(200px);
+    filter:blur(120px);
 
-    opacity:.18;
+    opacity:.4;
 
-    z-index:-1;
+    z-index:0;
 }
 
 /* JUDUL */
@@ -172,7 +174,7 @@ drop-shadow(0 0 25px #ff4ecd);
 }
 
 /* AI INSIGHT */
-.ai-box{
+.ai-card{
     background:rgba(255,255,255,.08);
 
     border:1px solid rgba(255,255,255,.15);
@@ -184,6 +186,16 @@ drop-shadow(0 0 25px #ff4ecd);
     padding:20px;
 
     margin-top:20px;
+}
+            
+.ai-card h3{
+    color:#ffd6f8;
+    margin-bottom:10px;
+}
+
+.ai-card p{
+    color:white;
+    line-height:1.8;
 }
 
 .ai-title{
@@ -242,6 +254,11 @@ drop-shadow(0 0 25px #ff4ecd);
 
 }
 
+.block-container{
+    position:relative;
+    z-index:1;
+}
+
 /* HIDE STREAMLIT */
 #MainMenu{
 visibility:hidden;
@@ -262,12 +279,6 @@ st.markdown("""
 <div class="glow1"></div>
 <div class="glow2"></div>
 """, unsafe_allow_html=True)
-
-st.markdown('<div class="upload-title">👶 Upload Foto Masa Kecil</div>', unsafe_allow_html=True)
-foto1 = st.file_uploader("", type=["jpg","jpeg","png"], key="foto1")
-
-st.markdown('<div class="upload-title">🧑 Upload Foto Dewasa</div>', unsafe_allow_html=True)
-foto2 = st.file_uploader("", type=["jpg","jpeg","png"], key="foto2")
 
 # ======================
 # MODEL
