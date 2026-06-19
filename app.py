@@ -20,96 +20,254 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.stApp{
-background:linear-gradient(
-135deg,
-#fdf4ff,
-#f5d0fe,
-#ddd6fe
-);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+html, body, [class*="css"]{
+    font-family:'Poppins',sans-serif;
 }
 
+/* BACKGROUND */
+.stApp{
+    background:linear-gradient(
+        135deg,
+        #312e81 0%,
+        #5b21b6 50%,
+        #7c3aed 100%
+    );
+    color:white;
+}
+
+/* GLOW EFFECT */
+.glow1{
+    position:fixed;
+    top:-300px;
+    left:-300px;
+
+    width:800px;
+    height:800px;
+
+    background:#ff4ecd;
+
+    border-radius:50%;
+
+    filter:blur(200px);
+
+    opacity:.18;
+
+    z-index:-1;
+}
+
+.glow2{
+    position:fixed;
+    bottom:-300px;
+    right:-300px;
+
+    width:800px;
+    height:800px;
+
+    background:#a855f7;
+
+    border-radius:50%;
+
+    filter:blur(200px);
+
+    opacity:.18;
+
+    z-index:-1;
+}
+
+/* JUDUL */
 .title{
-font-size:65px;
-font-weight:900;
-text-align:center;
+    text-align:center;
 
-background:linear-gradient(
-90deg,
-#ff71ce,
-#ff4ecd,
-#c77dff
-);
+    font-size:64px;
+    font-weight:800;
 
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #ffd6f8,
+        #ff9de6
+    );
 
-filter:drop-shadow(0 0 12px #ff4ecd);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    filter:drop-shadow(0 0 15px rgba(255,78,205,.6));
 }
 
 .subtitle{
-text-align:center;
-color:#6b7280;
-margin-bottom:30px;
+    text-align:center;
+    color:#e9d5ff;
+    font-size:18px;
+    margin-top:-10px;
+    margin-bottom:30px;
 }
 
+/* CARD */
 .glass{
-background:rgba(255,255,255,.45);
-backdrop-filter:blur(18px);
-padding:25px;
-border-radius:25px;
-box-shadow:0 8px 30px rgba(0,0,0,.08);
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,.2),
+    0 0 30px rgba(255,78,205,.15);
 }
 
+/* SCORE */
 .score{
-font-size:110px;
-font-weight:900;
-text-align:center;
+    font-size:110px;
+    font-weight:800;
+    text-align:center;
 
-background:linear-gradient(
-90deg,
-#ff71ce,
-#ff4ecd,
-#c77dff
-);
+    background:linear-gradient(
+        90deg,
+        #ff8fd8,
+        #ff4ecd,
+        #c77dff
+    );
 
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 
-filter:drop-shadow(0 0 15px #ff4ecd);
-
-animation:pulseGlow 2s infinite;
+    animation:pulseGlow 2.5s infinite;
 }
 
-.center{
-text-align:center;
+@keyframes pulseGlow{
+
+0%{
+filter:
+drop-shadow(0 0 10px #ff4ecd)
+drop-shadow(0 0 25px #ff4ecd);
 }
 
-.ai-card{
-background:white;
-padding:20px;
-border-radius:20px;
-margin-top:20px;
-border-left:6px solid #8b5cf6;
+50%{
+filter:
+drop-shadow(0 0 20px #ff4ecd)
+drop-shadow(0 0 50px #ff4ecd)
+drop-shadow(0 0 80px #c77dff);
 }
 
+100%{
+filter:
+drop-shadow(0 0 10px #ff4ecd)
+drop-shadow(0 0 25px #ff4ecd);
+}
+
+}
+
+/* UPLOAD TITLE */
+.upload-title{
+    color:white;
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+/* AI INSIGHT */
+.ai-box{
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    margin-top:20px;
+}
+
+.ai-title{
+    color:#ffd6f8;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.ai-text{
+    color:#ffffff;
+    line-height:1.8;
+    font-size:16px;
+}
+
+/* METRIC */
+[data-testid="stMetricValue"]{
+    color:white !important;
+}
+
+[data-testid="stMetricLabel"]{
+    color:#f3e8ff !important;
+}
+
+/* BUTTON */
 .stButton button{
-width:100%;
-height:60px;
-border:none;
-border-radius:20px;
-font-size:18px;
-font-weight:700;
-background:linear-gradient(
-90deg,
-#ec4899,
-#8b5cf6
-);
-color:white;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:15px;
+
+    color:white;
+
+    font-weight:700;
+
+    background:linear-gradient(
+        90deg,
+        #ff4ecd,
+        #a855f7
+    );
+
+    box-shadow:
+    0 0 20px rgba(255,78,205,.5);
+
+    transition:.3s;
+}
+
+.stButton button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 35px rgba(255,78,205,.8);
+
+}
+
+/* HIDE STREAMLIT */
+#MainMenu{
+visibility:hidden;
+}
+
+footer{
+visibility:hidden;
+}
+
+header{
+visibility:hidden;
 }
 
 </style>
 """, unsafe_allow_html=True)
+
+st.markdown("""
+<div class="glow1"></div>
+<div class="glow2"></div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="upload-title">👶 Upload Foto Masa Kecil</div>', unsafe_allow_html=True)
+foto1 = st.file_uploader("", type=["jpg","jpeg","png"], key="foto1")
+
+st.markdown('<div class="upload-title">🧑 Upload Foto Dewasa</div>', unsafe_allow_html=True)
+foto2 = st.file_uploader("", type=["jpg","jpeg","png"], key="foto2")
 
 # ======================
 # MODEL
