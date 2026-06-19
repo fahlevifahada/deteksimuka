@@ -30,16 +30,21 @@ background:linear-gradient(
 }
 
 .title{
-font-size:60px;
+font-size:65px;
 font-weight:900;
 text-align:center;
+
 background:linear-gradient(
 90deg,
-#ec4899,
-#8b5cf6
+#ff71ce,
+#ff4ecd,
+#c77dff
 );
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+
+filter:drop-shadow(0 0 12px #ff4ecd);
 }
 
 .subtitle{
@@ -57,16 +62,23 @@ box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
 .score{
-font-size:90px;
+font-size:110px;
 font-weight:900;
 text-align:center;
+
 background:linear-gradient(
 90deg,
-#ec4899,
-#8b5cf6
+#ff71ce,
+#ff4ecd,
+#c77dff
 );
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+
+filter:drop-shadow(0 0 15px #ff4ecd);
+
+animation:pulseGlow 2s infinite;
 }
 
 .center{
