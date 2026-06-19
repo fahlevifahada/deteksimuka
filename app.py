@@ -258,6 +258,29 @@ drop-shadow(0 0 25px #ff4ecd);
     position:relative;
     z-index:1;
 }
+            
+            /* CENTER METRIC */
+
+[data-testid="stMetric"]{
+    text-align:center;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:18px;
+    padding:15px;
+    backdrop-filter:blur(10px);
+}
+
+[data-testid="stMetricLabel"]{
+    justify-content:center !important;
+    color:#f3e8ff !important;
+    font-weight:600;
+}
+
+[data-testid="stMetricValue"]{
+    justify-content:center !important;
+    color:white !important;
+    font-weight:700;
+}
 
 /* HIDE STREAMLIT */
 #MainMenu{
@@ -337,7 +360,7 @@ def preprocess(uploaded_file):
 
 st.markdown("""
 <div class='title'>
-🌷 Then & Now AI
+🌷 Deteksi Kemiripan Wajah
 </div>
 
 <div class='subtitle'>
