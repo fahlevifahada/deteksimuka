@@ -409,30 +409,45 @@ if foto1 or foto2:
 
     with col1:
         if foto1:
-
             st.markdown("""
             <div class="glass">
-                <h4 style="text-align:center;color:white;">
+                <h4 style="
+                    text-align:center;
+                    color:white;
+                    margin:0;
+                ">
                     👶 Foto Masa Kecil
                 </h4>
             </div>
             """, unsafe_allow_html=True)
 
+            st.markdown("""
+                <div style='height:10px'></div>
+                """, unsafe_allow_html=True)
+
             st.image(
-                foto1,
-                use_container_width=True
-            )
+                    foto1,
+                    use_container_width=True
+)
 
     with col2:
         if foto2:
-
             st.markdown("""
-            <div class="glass">
-                <h4 style="text-align:center;color:white;">
+                    <div class="glass">
+                    <h4 style="
+                    text-align:center;
+                    color:white;
+                    margin:0;
+                                ">
                     🧑 Foto Dewasa
-                </h4>
-            </div>
-            """, unsafe_allow_html=True)
+                    </h4>
+                </div>
+                    """, unsafe_allow_html=True)
+
+            st.markdown(
+                "<div style='height:12px'></div>",
+                unsafe_allow_html=True
+            )
 
             st.image(
                 foto2,
