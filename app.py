@@ -418,57 +418,56 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 if foto1 or foto2:
 
-    st.markdown(
-        "<div style='height:25px'></div>",
-        unsafe_allow_html=True
-    )
+    st.markdown("<br>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
         if foto1:
-
             st.markdown("""
-            <div class="glass" style="padding:15px;">
+            <div class="glass">
                 <h4 style="
                     text-align:center;
                     color:white;
-                    margin-bottom:15px;
+                    margin:0;
                 ">
                     👶 Foto Masa Kecil
                 </h4>
             </div>
             """, unsafe_allow_html=True)
 
+            st.markdown("""
+                <div style='height:10px'></div>
+                """, unsafe_allow_html=True)
+
             st.image(
-                foto1,
-                use_container_width=True
-            )
+                    foto1,
+                    use_container_width=True
+)
 
     with col2:
         if foto2:
-
             st.markdown("""
-            <div class="glass" style="padding:15px;">
-                <h4 style="
+                    <div class="glass">
+                    <h4 style="
                     text-align:center;
                     color:white;
-                    margin-bottom:15px;
-                ">
+                    margin:0;
+                                ">
                     🧑 Foto Dewasa
-                </h4>
-            </div>
-            """, unsafe_allow_html=True)
+                    </h4>
+                </div>
+                    """, unsafe_allow_html=True)
+
+            st.markdown(
+                "<div style='height:12px'></div>",
+                unsafe_allow_html=True
+            )
 
             st.image(
                 foto2,
                 use_container_width=True
             )
-
-    st.markdown(
-        "<div style='height:25px'></div>",
-        unsafe_allow_html=True
-    )
 
 # ======================
 # ANALISIS
