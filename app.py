@@ -393,9 +393,9 @@ if foto1 or foto2:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    col1, col2 = st.columns(2)
+    col1,col2 = st.columns(2)
 
-    with col1:
+with col1:
     if foto1:
         st.markdown("""
         <div class="glass">
@@ -419,7 +419,7 @@ if foto1 or foto2:
             use_container_width=True
         )
 
-    with col2:
+with col2:
     if foto2:
         st.markdown("""
         <div class="glass">
