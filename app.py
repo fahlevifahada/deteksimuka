@@ -1,5 +1,4 @@
 import streamlit as st
-from deepface import DeepFace
 import tempfile
 
 st.set_page_config(page_title="Face Similarity AI")
