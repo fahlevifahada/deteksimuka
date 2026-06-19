@@ -8,65 +8,100 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy.spatial.distance import euclidean
 
 st.set_page_config(
-    page_title="Neural Face Match",
-    page_icon="🧬",
-    layout="wide"
+    page_title="Then & Now AI",
+    page_icon="🌷",
+    layout="centered"
 )
 
-# ==========================
+# ======================
 # STYLE
-# ==========================
+# ======================
 
 st.markdown("""
 <style>
 
 .stApp{
-background:
-linear-gradient(
+background:linear-gradient(
 135deg,
-#0f172a,
-#111827,
-#1e1b4b
+#fdf4ff,
+#f5d0fe,
+#ddd6fe
 );
-color:white;
 }
 
-.main-title{
+.title{
+font-size:60px;
+font-weight:900;
 text-align:center;
-font-size:50px;
-font-weight:800;
-color:#c084fc;
-text-shadow:0 0 25px #9333ea;
+background:linear-gradient(
+90deg,
+#ec4899,
+#8b5cf6
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .subtitle{
 text-align:center;
-color:#cbd5e1;
+color:#6b7280;
 margin-bottom:30px;
 }
 
-.result-box{
-padding:20px;
-border-radius:20px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-text-align:center;
-margin-top:20px;
+.glass{
+background:rgba(255,255,255,.45);
+backdrop-filter:blur(18px);
+padding:25px;
+border-radius:25px;
+box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
-.big-score{
-font-size:70px;
+.score{
+font-size:90px;
 font-weight:900;
-color:#a855f7;
-text-shadow:0 0 20px #9333ea;
+text-align:center;
+background:linear-gradient(
+90deg,
+#ec4899,
+#8b5cf6
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.center{
+text-align:center;
+}
+
+.ai-card{
+background:white;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+border-left:6px solid #8b5cf6;
+}
+
+.stButton button{
+width:100%;
+height:60px;
+border:none;
+border-radius:20px;
+font-size:18px;
+font-weight:700;
+background:linear-gradient(
+90deg,
+#ec4899,
+#8b5cf6
+);
+color:white;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# ==========================
-# LOAD MODEL
-# ==========================
+# ======================
+# MODEL
+# ======================
 
 with open("pca_model.pkl","rb") as f:
     model = pickle.load(f)
@@ -74,9 +109,9 @@ with open("pca_model.pkl","rb") as f:
 pca = model["pca"]
 img_size = model["img_size"]
 
-# ==========================
-# FACE DETECTION
-# ==========================
+# ======================
+# PREPROCESS
+# ======================
 
 def preprocess(uploaded_file):
 
@@ -115,153 +150,167 @@ def preprocess(uploaded_file):
 
     return gray.flatten().reshape(1,-1)
 
-# ==========================
+# ======================
 # HEADER
-# ==========================
+# ======================
 
-st.markdown(
-    '<div class="main-title">🧬 Neural Face Match</div>',
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class='title'>
+🌷 Then & Now AI
+</div>
 
-st.markdown(
-    '<div class="subtitle">Bandingkan foto masa kecil dan dewasa menggunakan PCA Eigenfaces</div>',
-    unsafe_allow_html=True
-)
+<div class='subtitle'>
+Bandingkan wajah masa kecil dan dewasa
+menggunakan PCA Face Recognition
+</div>
+""", unsafe_allow_html=True)
 
-# ==========================
+# ======================
 # UPLOAD
-# ==========================
+# ======================
 
-col1,col2 = st.columns(2)
+st.markdown("<div class='glass'>", unsafe_allow_html=True)
 
-with col1:
-    foto1 = st.file_uploader(
-        "📷 Foto Masa Kecil",
-        type=["jpg","jpeg","png"]
-    )
+foto1 = st.file_uploader(
+    "👶 Upload Foto Masa Kecil",
+    type=["jpg","jpeg","png"]
+)
 
-with col2:
-    foto2 = st.file_uploader(
-        "📷 Foto Dewasa",
-        type=["jpg","jpeg","png"]
-    )
+foto2 = st.file_uploader(
+    "🧑 Upload Foto Dewasa",
+    type=["jpg","jpeg","png"]
+)
 
-if foto1:
-    st.image(foto1,width=250)
+st.markdown("</div>", unsafe_allow_html=True)
 
-if foto2:
-    st.image(foto2,width=250)
+# ======================
+# ANALISIS
+# ======================
 
-# ==========================
-# ANALYZE
-# ==========================
-
-if st.button("🚀 Analisis Wajah"):
+if st.button("🚀 Analisis Kemiripan"):
 
     if foto1 is None or foto2 is None:
 
         st.warning(
-            "Upload kedua foto terlebih dahulu"
+            "Upload kedua foto terlebih dahulu."
         )
 
     else:
 
-        progress = st.progress(0)
-
-        for i in range(100):
-            progress.progress(i+1)
-
-        try:
+        with st.spinner(
+            "AI sedang menganalisis wajah..."
+        ):
 
             img1 = preprocess(foto1)
             img2 = preprocess(foto2)
 
-            vec1 = pca.transform(img1)
-            vec2 = pca.transform(img2)
+            v1 = pca.transform(img1)
+            v2 = pca.transform(img2)
 
             cos_sim = float(
-                cosine_similarity(
-                    vec1,
-                    vec2
-                )[0][0]
+                cosine_similarity(v1,v2)[0][0]
             )
 
             euc_dist = float(
-                euclidean(
-                    vec1[0],
-                    vec2[0]
-                )
+                euclidean(v1[0],v2[0])
             )
 
-            cos_pct = max(
-                0,
-                min(
-                    100,
-                    ((cos_sim + 1)/2)*100
-                )
-            )
+            cos_pct = ((cos_sim + 1)/2)*100
 
             euc_pct = max(
                 0,
-                min(
-                    100,
-                    (1-(euc_dist/60))*100
-                )
+                (1-(euc_dist/60))*100
             )
 
             similarity = (
-                cos_pct +
-                euc_pct
-            ) / 2
-
-            st.markdown(
-                f"""
-                <div class="result-box">
-
-                <div class="big-score">
-                {similarity:.1f}%
-                </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
+                cos_pct * 0.7 +
+                euc_pct * 0.3
             )
 
+            similarity = max(
+                0,
+                min(
+                    100,
+                    similarity
+                )
+            )
+
+        st.markdown(f"""
+        <div class='glass'>
+
+        <div class='score'>
+        {similarity:.1f}%
+        </div>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.progress(
+            int(similarity)
+        )
+
+        if similarity >= 80:
+
+            verdict = "✅ Sangat Mirip"
+
+            insight = """
+            Struktur wajah menunjukkan
+            kemiripan yang sangat tinggi.
+            Perubahan usia tidak terlalu
+            mempengaruhi pola utama wajah.
+            """
+
+        elif similarity >= 60:
+
+            verdict = "🟡 Cukup Mirip"
+
+            insight = """
+            Terdapat kemiripan yang cukup kuat,
+            namun perubahan usia dan ekspresi
+            mempengaruhi hasil analisis.
+            """
+
+        else:
+
+            verdict = "❌ Kurang Mirip"
+
+            insight = """
+            Pola wajah yang terdeteksi cukup
+            berbeda sehingga sistem menemukan
+            kemiripan yang rendah.
+            """
+
+        st.markdown(
+            f"<h2 class='center'>{verdict}</h2>",
+            unsafe_allow_html=True
+        )
+
+        st.markdown(f"""
+        <div class='ai-card'>
+
+        <h3>🤖 AI Insight</h3>
+
+        <p>{insight}</p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1,col2,col3 = st.columns(3)
+
+        with col1:
             st.metric(
-                "Cosine Similarity",
-                f"{cos_sim:.4f}"
+                "Cosine",
+                f"{cos_sim:.3f}"
             )
 
+        with col2:
             st.metric(
-                "Euclidean Distance",
-                f"{euc_dist:.4f}"
+                "Distance",
+                f"{euc_dist:.2f}"
             )
 
-            st.progress(
-                int(similarity)
-            )
-
-            if similarity >= 80:
-
-                st.success(
-                    "✅ Sangat Mirip"
-                )
-
-            elif similarity >= 60:
-
-                st.warning(
-                    "🟡 Cukup Mirip"
-                )
-
-            else:
-
-                st.error(
-                    "❌ Kurang Mirip"
-                )
-
-        except Exception as e:
-
-            st.error(
-                f"Error : {e}"
+        with col3:
+            st.metric(
+                "Confidence",
+                f"{similarity:.1f}%"
             )
