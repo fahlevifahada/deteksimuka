@@ -263,7 +263,11 @@ drop-shadow(0 0 25px #ff4ecd);
     text-align:center;
     color:white;
     margin-top:25px;
-}          
+}
+
+img{
+border-radius:20px;
+}
             
             /* CENTER METRIC */
 
@@ -405,45 +409,30 @@ if foto1 or foto2:
 
     with col1:
         if foto1:
+
             st.markdown("""
             <div class="glass">
-                <h4 style="
-                    text-align:center;
-                    color:white;
-                    margin:0;
-                ">
+                <h4 style="text-align:center;color:white;">
                     👶 Foto Masa Kecil
                 </h4>
             </div>
             """, unsafe_allow_html=True)
 
-            st.markdown("""
-                <div style='height:10px'></div>
-                """, unsafe_allow_html=True)
-
             st.image(
-                    foto1,
-                    use_container_width=True
-)
+                foto1,
+                use_container_width=True
+            )
 
     with col2:
         if foto2:
+
             st.markdown("""
             <div class="glass">
-                <h4 style="
-                    text-align:center;
-                    color:white;
-                    margin:0;
-                ">
+                <h4 style="text-align:center;color:white;">
                     🧑 Foto Dewasa
                 </h4>
-            </h4>
+            </div>
             """, unsafe_allow_html=True)
-
-            st.markdown(
-                "<div style='height:12px'></div>",
-                unsafe_allow_html=True
-            )
 
             st.image(
                 foto2,
